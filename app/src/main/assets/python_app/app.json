@@ -1,0 +1,29 @@
+{
+  "app_name": "Simple1",
+  "package": "com.fastdevpy4a.simple1",
+  "version_code": 1,
+  "version_name": "1.0",
+  "version": "1.0",
+  "icon": "images/icon.svg",
+  "icon_text": "Py4A",
+  "dev_mode": true, 
+  "foreground_service": {
+    "enabled": false,
+    "notification": {
+      "id": 12,
+      "channel_id": "fastapp_service",
+      "channel_name": "FastApp Service",
+      "title": "FastApp",
+      "content": "Running in background..."
+    }
+  },
+  "system": {
+    "run": [],
+    "volume": ["/sdcard:/sdcard"],
+    "envs": {
+      "SS": "FastApp"
+    },
+    "dns": ["119.29.29.29"],
+    "hosts": ["127.0.0.1 localhost"]
+  }
+}

@@ -1,0 +1,24 @@
+[versions]
+agp = "8.7.2"
+appcompat = "1.7.0"
+commonsCompress = "1.21"
+flatbuffersJava = "24.3.25"
+gson = "2.10.1"
+material = "1.12.0"
+activity = "1.9.3"
+constraintlayout = "2.2.0"
+firebaseCrashlyticsBuildtools = "3.0.2"
+
+[libraries]
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+commons-compress = { module = "org.apache.commons:commons-compress", version.ref = "commonsCompress" }
+flatbuffers-java = { module = "com.google.flatbuffers:flatbuffers-java", version.ref = "flatbuffersJava" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+firebase-crashlytics-buildtools = { group = "com.google.firebase", name = "firebase-crashlytics-buildtools", version.ref = "firebaseCrashlyticsBuildtools" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+

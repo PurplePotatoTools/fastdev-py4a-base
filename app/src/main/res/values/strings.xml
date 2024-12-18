@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name" translatable="false">FastApp</string>
+    <string name="whether_to_jump_to_an_external_application">Whether to jump to an external application</string>
+    <string name="whether_to_jump_to_an_external_browser_for_downloading">Whether to jump to an external browser for downloading</string>
+    <string name="no_more_popups">No more popups</string>
+    <string name="need_access_permission">Need access permission</string>
+</resources>

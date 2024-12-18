@@ -1,0 +1,6 @@
+<resources>
+    <string name="whether_to_jump_to_an_external_application">是否跳转到外部应用</string>
+    <string name="whether_to_jump_to_an_external_browser_for_downloading">是否跳转到外部浏览器下载</string>
+    <string name="need_access_permission">需要授权后使用</string>
+    <string name="no_more_popups">不再弹出</string>
+</resources>
