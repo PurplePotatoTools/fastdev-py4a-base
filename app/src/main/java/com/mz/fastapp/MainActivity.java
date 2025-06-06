@@ -21,7 +21,6 @@ import com.mz.fastapp.third_party.AndroidBug5497Workaround;
 
 import java.io.InputStream;
 import java.util.HashMap;
-import java.util.Objects;
 
 public class MainActivity extends FunctionalViewActivity {
 
@@ -60,7 +59,8 @@ public class MainActivity extends FunctionalViewActivity {
 
 
 
-        GlobalVariable.mainContext = this;
+        GlobalVariable.mainActivityInstance = this;
+
         initGlobalConfig();
         boolean emptyView = false;
         try {
@@ -73,6 +73,7 @@ public class MainActivity extends FunctionalViewActivity {
             startWebMode();
         }
 
+        GlobalVariable.functionalViewActivityInstance = this;
     }
 
 
@@ -131,6 +132,7 @@ public class MainActivity extends FunctionalViewActivity {
         // webView.getSettings().setSupportMultipleWindows(true);
         webView.setWebChromeClient(coreWebChromeViewClient);
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setDomStorageEnabled(true);
         webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
         webView.getSettings().setAllowFileAccessFromFileURLs(true);
         webView.getSettings().setAllowContentAccess(true);
@@ -160,7 +162,8 @@ public class MainActivity extends FunctionalViewActivity {
         if (webView != null) {
             webView.onResume();
         }
-        GlobalVariable.mainContext = this;
+        GlobalVariable.mainActivityInstance = this;
+        GlobalVariable.functionalViewActivityInstance = this;
     }
 
     @Override

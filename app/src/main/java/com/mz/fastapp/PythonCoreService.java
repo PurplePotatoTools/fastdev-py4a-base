@@ -19,6 +19,14 @@ import java.util.HashMap;
 
 public class PythonCoreService extends Service {
 
+    static {
+        System.loadLibrary("fastapp");
+    }
+
+
+    public native void startTFRPCServer(String path);
+    public native void logInit();
+
     int state = 0;
 
     public PythonCoreService() {
@@ -36,6 +44,16 @@ public class PythonCoreService extends Service {
     public void onCreate() {
         super.onCreate();
         Utils.foregroundServiceNotification(this);
+        this.logInit();
+        
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        GlobalVariable.tfliteSocketPath = this.getFilesDir().getAbsolutePath() + "/tflite_socket";
+        Log.d("PythonCoreService", "startTFRPCServer: " + GlobalVariable.tfliteSocketPath);
+        this.startTFRPCServer(GlobalVariable.tfliteSocketPath);
     }
 
 
@@ -48,6 +66,9 @@ public class PythonCoreService extends Service {
             return;
         }
         PythonCoreService.isRunning = true;
+
+
+
         GlobalVariable.controlSocketPath = ctx.getFilesDir().getAbsolutePath() + "/ipc_socket/control";
         if (new File(GlobalVariable.controlSocketPath).exists()) {
             new File(GlobalVariable.controlSocketPath).delete();

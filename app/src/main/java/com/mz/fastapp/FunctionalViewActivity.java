@@ -51,6 +51,7 @@ import top.zibin.luban.Luban;
 import top.zibin.luban.OnNewCompressListener;
 
 public class FunctionalViewActivity extends AppCompatActivity {
+
     public boolean isWorking = false;
 
     private Runnable nextRunnable;

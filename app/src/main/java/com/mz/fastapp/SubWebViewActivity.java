@@ -68,6 +68,7 @@ public class SubWebViewActivity extends FunctionalViewActivity {
         webView.setWebViewClient(coreWebViewClient);
         webView.setWebChromeClient(coreWebChromeViewClient);
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setDomStorageEnabled(true);
         webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
         webView.getSettings().setAllowFileAccessFromFileURLs(true);
         webView.getSettings().setAllowContentAccess(true);
@@ -101,6 +102,8 @@ public class SubWebViewActivity extends FunctionalViewActivity {
         if (webView != null) {
             webView.onResume();
         }
+
+        GlobalVariable.functionalViewActivityInstance = this;
     }
 
     @Override

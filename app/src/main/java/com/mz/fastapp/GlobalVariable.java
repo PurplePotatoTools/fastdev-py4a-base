@@ -10,7 +10,13 @@ public class GlobalVariable {
     public static String PY4A_PORT = "-1";
     public static String controlSocketPath = null;
     public static String notifySocketPath = null;
-    public static Activity mainContext;
+
+    public static String tfliteSocketPath = null;
+    
+    public static Activity mainActivityInstance;
+    
+    public static FunctionalViewActivity functionalViewActivityInstance;
+
     public static HashMap params = new HashMap<>();
     public static String lastStartupLog = "";
 

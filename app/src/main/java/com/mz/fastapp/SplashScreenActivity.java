@@ -16,7 +16,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 
 @SuppressLint("CustomSplashScreen")
-public class SplashScreenActivity extends AppCompatActivity {
+public class SplashScreenActivity extends FunctionalViewActivity {
 
     public static SplashScreenActivity instance = null;
 
@@ -31,13 +31,13 @@ public class SplashScreenActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        GlobalVariable.mainContext = this;
+        GlobalVariable.mainActivityInstance = this;
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        GlobalVariable.mainContext = this;
+        GlobalVariable.mainActivityInstance = this;
         syncLog();
     }
 
@@ -91,7 +91,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         Log.d("SplashScreenActivity", "port: " + confPort);
         GlobalVariable.PY4A_PORT = confPort;
 
-        GlobalVariable.mainContext = this;
+        GlobalVariable.mainActivityInstance = this;
 
         // 读取配置文件python_app/app.json 格式化到 GlobalConfig.params
         try {

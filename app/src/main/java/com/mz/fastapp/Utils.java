@@ -211,12 +211,12 @@ public class Utils {
     }
 
     public static void runOnUiThread(Runnable runnable) {
-        Activity context = GlobalVariable.mainContext;
+        Activity context = GlobalVariable.mainActivityInstance;
         context.runOnUiThread(runnable);
     }
 
     public static String getString(int id) {
-        Activity context = GlobalVariable.mainContext;
+        Activity context = GlobalVariable.mainActivityInstance;
         return context.getResources().getString(id);
     }
 
@@ -229,7 +229,7 @@ public class Utils {
     }
 
     public static void showAlert(String message) {
-        Activity context = GlobalVariable.mainContext;
+        Activity context = GlobalVariable.mainActivityInstance;
         showAlert(
                 context,
                 Resources.getSystem().getString(android.R.string.dialog_alert_title),
@@ -350,7 +350,7 @@ public class Utils {
     }
 
     public static void openActivity(String activityName) {
-        Activity context = GlobalVariable.mainContext;
+        Activity context = GlobalVariable.mainActivityInstance;
         openActivity(context, activityName);
     }
 
@@ -941,7 +941,7 @@ public class Utils {
             return Uri.parse(path);
         }
         Uri mediaUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-        if (GlobalVariable.mainContext == null) {
+        if (GlobalVariable.mainActivityInstance == null) {
             Log.e("getMediaUriFromPath", "GlobalVariable.mainContext is null");
         }
         Cursor cursor = context.getContentResolver().query(mediaUri,
@@ -966,7 +966,7 @@ public class Utils {
      * @return
      */
     public static String getSandboxPath() {
-        File externalFilesDir = GlobalVariable.mainContext.getExternalFilesDir("");
+        File externalFilesDir = GlobalVariable.mainActivityInstance.getExternalFilesDir("");
         File customFile = new File(externalFilesDir.getAbsolutePath(), "Sandbox");
         if (!customFile.exists()) {
             customFile.mkdirs();
@@ -1012,13 +1012,13 @@ public class Utils {
         if (Utils.checkCoreHttp()) {
             return;
         }
-        if (GlobalVariable.mainContext == null) {
+        if (GlobalVariable.mainActivityInstance == null) {
             Log.e("checkServiceLife","GlobalVariable.mainContext == null");
             return;
         }
-        GlobalVariable.mainContext.runOnUiThread(() -> {
+        GlobalVariable.mainActivityInstance.runOnUiThread(() -> {
             GlobalVariable.lastStartupLog = "";
-            GlobalVariable.mainContext.startService(new Intent(GlobalVariable.mainContext, PythonCoreService.class));
+            GlobalVariable.mainActivityInstance.startService(new Intent(GlobalVariable.mainActivityInstance, PythonCoreService.class));
             AlertDialog dialog = popLoading();
             Utils.waitLoadMainUrl(() -> {
 
@@ -1028,7 +1028,7 @@ public class Utils {
                     throw new RuntimeException(e);
                 }
                 if (dialog != null){
-                    GlobalVariable.mainContext.runOnUiThread(() -> {
+                    GlobalVariable.mainActivityInstance.runOnUiThread(() -> {
                         r.run();
                         dialog.dismiss();
                     });
@@ -1041,17 +1041,17 @@ public class Utils {
         if (popLoadingLogTextView == null){
             return;
         }
-        GlobalVariable.mainContext.runOnUiThread(() -> {
+        GlobalVariable.mainActivityInstance.runOnUiThread(() -> {
             popLoadingLogTextView.setText(GlobalVariable.lastStartupLog);
         });
     }
     static TextView popLoadingLogTextView;
     public static AlertDialog popLoading() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(GlobalVariable.mainContext);
+        AlertDialog.Builder builder = new AlertDialog.Builder(GlobalVariable.mainActivityInstance);
         final AlertDialog[] result = new AlertDialog[1];
-        GlobalVariable.mainContext.runOnUiThread(() -> {
+        GlobalVariable.mainActivityInstance.runOnUiThread(() -> {
             builder.setTitle("server is reloading...");
-            View dialogView = LayoutInflater.from(GlobalVariable.mainContext).inflate(R.layout.alert_log_view, null, false);
+            View dialogView = LayoutInflater.from(GlobalVariable.mainActivityInstance).inflate(R.layout.alert_log_view, null, false);
             builder.setView(dialogView);
             builder.setCancelable(false);
             result[0] = builder.show();

@@ -1,7 +1,6 @@
 package com.mz.fastapp;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,9 +12,7 @@ import android.opengl.GLES30;
 import android.opengl.GLSurfaceView;
 import android.opengl.GLUtils;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
-import android.view.Surface;
 import android.view.ViewGroup;
 
 import androidx.activity.EdgeToEdge;
@@ -25,7 +22,6 @@ import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageCapture;
 import androidx.camera.core.ImageCaptureException;
 import androidx.camera.core.ImageProxy;
-import androidx.camera.core.MirrorMode;
 import androidx.camera.core.Preview;
 import androidx.camera.core.SurfaceRequest;
 import androidx.camera.lifecycle.ProcessCameraProvider;
@@ -35,7 +31,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import android.graphics.Matrix;
 import android.widget.ImageView;
 
 import com.google.common.util.concurrent.ListenableFuture;
@@ -224,7 +219,7 @@ public class CameraAnalyzeActivity extends FunctionalViewActivity {
 
     public static void open(Context context) {
         if (context == null) {
-            context = GlobalVariable.mainContext;
+            context = GlobalVariable.mainActivityInstance;
         }
         Intent intent = new Intent(context, CameraAnalyzeActivity.class);
         context.startActivity(intent);
@@ -242,6 +237,7 @@ public class CameraAnalyzeActivity extends FunctionalViewActivity {
         });
 
         instance = this;
+        GlobalVariable.functionalViewActivityInstance = this;
 
         ViewGroup rootView = findViewById(R.id.main);
         if (paramsPreviewViewWidth == -1 || paramsPreviewViewHeight == -1) {
